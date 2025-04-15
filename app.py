@@ -83,7 +83,7 @@ with tab1:
     col1, col2 = st.columns([1, 1.5])
     
     with col1:
-        st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+        st.markdown("<div class='info-box'>", unsafe_allow_html=True)
         st.markdown("<h3 class='section-title' style='font-size: 1.2rem;'>Input Flower Measurements</h3>", unsafe_allow_html=True)
         
         # Input flower specifications using sliders with custom styling
@@ -135,7 +135,7 @@ with tab1:
             predicted_species, probabilities = iris_model.predict_species(model_name, input_data)
             
             # Display the result with enhanced styling
-            st.markdown("<div class='card'>", unsafe_allow_html=True)
+            st.markdown("<div class='info-box'>", unsafe_allow_html=True)
             st.markdown("<h3 class='sub-header'>Prediction Result</h3>", unsafe_allow_html=True)
             
             # Display species with a more attractive visual
@@ -233,9 +233,9 @@ with tab1:
 with tab2:
     st.markdown("<h2 class='sub-header'>Iris Dataset Exploration</h2>", unsafe_allow_html=True)
     
-    # Display dataset statistics in a card
-    st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.markdown("<h3 class='sub-header'>Dataset Overview</h3>", unsafe_allow_html=True)
+    # Display dataset statistics in a box
+    st.markdown("<div class='info-box'>", unsafe_allow_html=True)
+    st.markdown("<h3 class='section-title'>Dataset Overview</h3>", unsafe_allow_html=True)
     stats = iris_model.get_dataset_statistics()
     
     # Create a more visual dataset overview

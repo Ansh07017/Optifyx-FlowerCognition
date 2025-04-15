@@ -13,59 +13,89 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for styling
+# Set up a clean, modern theme with custom CSS
 st.markdown("""
 <style>
-    .main-header {
-        font-size: 2.5rem;
-        color: #FF4B4B;
-        text-align: center;
-        margin-bottom: 1rem;
-        font-weight: bold;
+    /* Typography enhancements */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Helvetica Neue', sans-serif;
     }
-    .sub-header {
-        font-size: 1.5rem;
-        color: #4B4BFF;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-    }
-    .card {
+    
+    /* Custom containers */
+    div.custom-container {
         border-radius: 10px;
         padding: 1.5rem;
         margin-bottom: 1rem;
         background-color: #f8f9fa;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .prediction-result {
+    
+    div.highlight-container {
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        background-color: #f0f7ff;
+        border-left: 5px solid #4B4BFF;
+    }
+    
+    div.prediction-container {
         padding: 1rem;
         border-radius: 5px;
         text-align: center;
         font-weight: bold;
         font-size: 1.2rem;
+        margin: 1rem 0;
     }
-    .highlight {
+    
+    /* Custom headers */
+    .custom-title {
+        font-size: 2.5rem;
+        color: #FF4B4B;
+        text-align: center;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+    
+    .custom-header {
+        font-size: 1.5rem;
+        color: #4B4BFF;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+    
+    /* Button styling */
+    .stButton>button {
+        font-weight: bold;
+        border-radius: 8px;
+    }
+    
+    /* Sidebar layout improvements */
+    section[data-testid="stSidebar"] {
+        background-color: #f5f5f5;
+        padding: 1rem;
+    }
+    
+    /* Misc elements */
+    .highlight-text {
         color: #FF4B4B;
         font-weight: bold;
     }
-    .sidebar .sidebar-content {
-        background-color: #f5f5f5;
+    
+    /* Tab adjustments */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
     }
-    .stButton>button {
-        background-color: #4CAF50;
-        color: white;
+    
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        white-space: pre-wrap;
+        border-radius: 4px 4px 0 0;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: #f0f7ff;
         font-weight: bold;
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        border: none;
-        width: 100%;
-    }
-    .stButton>button:hover {
-        background-color: #45a049;
-    }
-    .tab-header {
-        font-weight: bold;
-        color: #4B4BFF;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -78,9 +108,9 @@ def load_model():
 iris_model = load_model()
 
 # App title and introduction
-st.markdown("<h1 class='main-header'>🌸 Iris Species Predictor</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='custom-title'>🌸 Iris Species Predictor</h1>", unsafe_allow_html=True)
 st.markdown("""
-<div class="card">
+<div class="custom-container">
     <p>Welcome to the Iris Species Predictor! This interactive application uses machine learning
     to predict the species of iris flowers based on their measurements.</p>
     <p>The app is powered by several ML models that have been trained on the famous Iris dataset.
@@ -93,14 +123,14 @@ tab1, tab2, tab3, tab4 = st.tabs(["Prediction", "Dataset Exploration", "Model Pe
 
 # Tab 1: Prediction
 with tab1:
-    st.markdown("<h2 class='sub-header'>Predict Iris Species</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 class='custom-header'>Predict Iris Species</h2>", unsafe_allow_html=True)
     
     # Create two columns for input and results
     col1, col2 = st.columns([1, 1.5])
     
     with col1:
-        st.markdown("<div class='card'>", unsafe_allow_html=True)
-        st.markdown("<h3 class='sub-header' style='font-size: 1.2rem;'>Input Flower Measurements</h3>", unsafe_allow_html=True)
+        st.markdown("<div class='custom-container'>", unsafe_allow_html=True)
+        st.markdown("<h3 class='custom-header' style='font-size: 1.2rem;'>Input Flower Measurements</h3>", unsafe_allow_html=True)
         
         # Input flower specifications using sliders with custom styling
         st.markdown("<p style='margin-bottom: 0.2rem; font-weight: bold; color: #5566cc;'>Sepal Length (cm)</p>", unsafe_allow_html=True)

@@ -1,3 +1,4 @@
+#streamlit run app.py --server.port 8501 --server.address 127.0.0.1
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -88,16 +89,16 @@ with tab1:
         
         # Input flower specifications using sliders with custom styling
         st.markdown("<p style='margin-bottom: 0.2rem; font-weight: bold; color: #5566cc;'>Sepal Length (cm)</p>", unsafe_allow_html=True)
-        sepal_length = st.slider("", 4.3, 7.9, 5.4, key="sepal_length_slider")
-        
+        sepal_length = st.slider("Sepal Length (cm)", 4.3, 7.9, 5.4, key="sepal_length_slider", label_visibility="hidden")
+                
         st.markdown("<p style='margin-bottom: 0.2rem; font-weight: bold; color: #5566cc;'>Sepal Width (cm)</p>", unsafe_allow_html=True)
-        sepal_width = st.slider("", 2.0, 4.4, 3.4, key="sepal_width_slider")
-        
+        sepal_width = st.slider("Sepal Width (cm)", 2.0, 4.4, 3.4, key="sepal_width_slider", label_visibility="hidden")
+                
         st.markdown("<p style='margin-bottom: 0.2rem; font-weight: bold; color: #5566cc;'>Petal Length (cm)</p>", unsafe_allow_html=True)
-        petal_length = st.slider("", 1.0, 6.9, 1.3, key="petal_length_slider")
-        
+        petal_length = st.slider("Petal Length (cm)", 1.0, 6.9, 1.3, key="petal_length_slider", label_visibility="hidden")
+                
         st.markdown("<p style='margin-bottom: 0.2rem; font-weight: bold; color: #5566cc;'>Petal Width (cm)</p>", unsafe_allow_html=True)
-        petal_width = st.slider("", 0.1, 2.5, 0.2, key="petal_width_slider")
+        petal_width = st.slider("Petal Width (cm)", 0.1, 2.5, 0.2, key="petal_width_slider", label_visibility="hidden")
         
         # Summary of input data
         st.markdown("<h3 class='sub-header' style='font-size: 1.2rem; margin-top: 1.5rem;'>Measurement Summary</h3>", unsafe_allow_html=True)
@@ -334,7 +335,7 @@ with tab2:
         feature = st.selectbox("Select Feature for Boxplot", iris_model.feature_names)
         
         fig, ax = plt.subplots(figsize=(10, 6))
-        sns.boxplot(x='species_name', y=feature, data=iris_model.df, palette=['#FF9999', '#66B2FF', '#99FF99'])
+        sns.boxplot(x='species_name', y=feature, data=iris_model.df, hue='species_name', palette=['#FF9999', '#66B2FF', '#99FF99'], legend=False)
         plt.title(f'Distribution of {feature} by Species', fontsize=16, fontweight='bold')
         plt.xlabel('Species', fontsize=12)
         plt.ylabel(feature, fontsize=12)
@@ -346,7 +347,7 @@ with tab2:
         feature = st.selectbox("Select Feature for Violin Plot", iris_model.feature_names)
         
         fig, ax = plt.subplots(figsize=(10, 6))
-        sns.violinplot(x='species_name', y=feature, data=iris_model.df, palette=['#FF9999', '#66B2FF', '#99FF99'], inner='quartile')
+        sns.violinplot(x='species_name', y=feature, data=iris_model.df, hue='species_name', palette=['#FF9999', '#66B2FF', '#99FF99'], inner='quartile', legend=False)
         plt.title(f'Distribution Density of {feature} by Species', fontsize=16, fontweight='bold')
         plt.xlabel('Species', fontsize=12)
         plt.ylabel(feature, fontsize=12)
@@ -399,7 +400,9 @@ with tab3:
     fig, ax = plt.subplots(figsize=(10, 6))
     
     # Create a color gradient based on accuracy values
-    cmap = plt.cm.get_cmap('RdYlGn')
+    from matplotlib import colormaps  # Import colormaps
+    
+    cmap = colormaps.get_cmap('RdYlGn')  # Use colormaps.get_cmap()
     min_acc = acc_df['Accuracy'].min()
     max_acc = acc_df['Accuracy'].max()
     normalized_acc = [(x - min_acc) / (max_acc - min_acc) for x in acc_df['Accuracy']]
@@ -420,9 +423,9 @@ with tab3:
     plt.tight_layout()
     st.pyplot(fig)
     
-    # Display top model with enhanced styling
+    top_accuracy = acc_df['Accuracy'].iloc[0]  # Use .iloc for positional indexing
     top_model = acc_df.index[0]
-    top_accuracy = acc_df['Accuracy'][0]
+    top_accuracy = acc_df['Accuracy'].iloc[0]
     
     st.markdown(f"""
     <div style='background-color: #e6ffe6; padding: 1rem; border-radius: 10px; border-left: 5px solid #4CAF50; margin-top: 1rem;'>
@@ -902,3 +905,99 @@ st.sidebar.markdown("""
     </p>
 </div>
 """, unsafe_allow_html=True)
+st.markdown("""
+<style>
+    /* General background and text colors */
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    .main-title {
+        color: #BB86FC;
+    }
+    .section-title {
+        color: #03DAC6;
+    }
+    .info-box {
+        background-color: #1E1E1E;
+        border-radius: 10px;
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .highlight-text {
+        color: #BB86FC;
+        font-weight: bold;
+    }
+    .stButton>button {
+        background-color: #03DAC6;
+        color: #121212;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+    }
+    .stButton>button:hover {
+        background-color: #BB86FC;
+        color: #121212;
+    }
+    .stDataFrame {
+        background-color: #1E1E1E;
+        color: #e0e0e0;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background-color: #1E1E1E;
+        color: #e0e0e0;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #03DAC6;
+        color: #121212;
+    }
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        background-color: #03DAC6;
+        color: #121212;
+    }
+    /* Adjust text and background colors for better readability */
+    body {
+        background-color: #f5f5f5;
+        color: #333333;
+    }
+    .main-title {
+        color: #FF4B4B;
+    }
+    .section-title {
+        color: #4B4BFF;
+    }
+    .info-box {
+        background-color: #ffffff;
+        color: #333333;
+        border: 1px solid #dddddd;
+    }
+    .highlight-text {
+        color: #FF4B4B;
+    }
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .stButton>button:hover {
+        background-color: #45a049;
+    }
+    .stDataFrame {
+        background-color: #ffffff;
+        color: #333333;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background-color: #ffffff;
+        color: #333333;
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #f0f0f0;
+    }
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        background-color: #4CAF50;
+        color: white;
+    }
+            
+</style>
+""", unsafe_allow_html=True)
+

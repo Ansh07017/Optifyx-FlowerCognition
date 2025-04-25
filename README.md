@@ -33,6 +33,6 @@ We use the **Iris dataset (iris.csv)**, a classic dataset in machine learning th
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/iris-ml-streamlit.git
+   git clone https://github.com/Ansh07017/Optifyx-FlowerCognition.git
    cd iris-ml-streamlit
 

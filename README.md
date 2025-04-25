@@ -35,4 +35,6 @@ We use the **Iris dataset (iris.csv)**, a classic dataset in machine learning th
    ```bash
    git clone https://github.com/Ansh07017/Optifyx-FlowerCognition.git
    cd iris-ml-streamlit
+2. pip install -r requirements.txt
+3. streamlit run app.py
 

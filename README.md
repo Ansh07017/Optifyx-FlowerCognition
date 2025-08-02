@@ -38,3 +38,4 @@ We use the **Iris dataset (iris.csv)**, a classic dataset in machine learning th
 2. pip install -r requirements.txt
 3. streamlit run app.py
 
+check it on: https://flowercognition.streamlit.app/ 
